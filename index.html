@@ -8,22 +8,25 @@
     <title>Weather</title>
   </head>
   <body>
-    <form id="search-form">
-      <input type="text" name="location" id="location">
-      <button id="search" type="button">Search</button>
-    </form>
-    <div id="units-container">
-      <p id="celcius">°C</p>
-      <label class="switch">
-        <input type="checkbox">
-        <span class="slider"></span>
-      </label>
-      <p id="farenheit">°F</p>
-    </div>
+    <header>
+      <form id="search-form">
+        <input type="text" name="location" id="location">
+        <button id="search" type="button">Search</button>
+      </form>
+      <div id="units-container">
+        <p id="celcius">°C</p>
+        <label class="switch">
+          <input type="checkbox" id="temperature-input">
+          <span class="slider" id="temperature-slider"></span>
+        </label>
+        <p class="hidden" id="farenheit">°F</p>
+      </div>
+    </header>
     <h1 id="error-message"></h1>
     <div id="display">
       <div id="weather-display"></div>
-      <div id="forecast-display"></div>
+      <div id="forecast-display">
+      </div>
     </div>
   </body>
 </html>

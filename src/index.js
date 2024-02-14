@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { displayWeather } from "./UIDisplay";
+import { displayWeather, displayForecast } from "./UIDisplay";
 
 const errorMessage = document.getElementById("error-message");
 
@@ -35,7 +35,7 @@ const processWeatherData = (weatherData) => {
 
 const processForecastData = (forecastData) => {
   const days = forecastData.forecast.forecastday;
-  console.log(days);
+  displayForecast(days);
 };
 
 async function getWeatherData(city) {
@@ -49,10 +49,11 @@ async function getWeatherData(city) {
     } else {
       const weatherData = await response.json();
       errorMessage.textContent = "";
-      console.log(weatherData);
+      //console.log(weatherData);
       processWeatherData(weatherData);
     }
   } catch (error) {
+    console.log(error);
     errorMessage.textContent = "Location not found";
   }
 }
@@ -68,10 +69,11 @@ async function getForecastData(city) {
     } else {
       const forecastData = await response.json();
       errorMessage.textContent = "";
-      console.log(forecastData);
+      //console.log(forecastData);
       processForecastData(forecastData);
     }
   } catch (error) {
+    console.log(error);
     errorMessage.textContent = "Location not found";
   }
 }
@@ -82,7 +84,6 @@ const searchLocationButton = document.querySelector("button#search");
 searchLocationButton.addEventListener("click", () => {
   const newCity = searchLocationInput.value;
   if (newCity) {
-    console.log(newCity);
     getWeatherData(newCity);
     getForecastData(newCity);
     searchLocationInput.value = "";

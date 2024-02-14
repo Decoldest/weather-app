@@ -23,10 +23,10 @@ const displayWeather = ({ ...weatherData }) => {
     <h2>${temperature} ${displayUnits[0]}</h2>
   </div>
   <div>
-    <h4>Feels like ${weatherData.feelsCelcius} ${displayUnits[0]}</h4>
-    <h4>Wind Speed ${windSpeed} ${displayUnits[1]}</h4>
-    <h4>Humidity ${weatherData.humidity}</h4>
-    <h4>UV ${weatherData.uv}</h4>
+    <h4>Feels like ${weatherData.feelsCelsius} ${displayUnits[0]}</h4>
+    <h4><img src="imgs/wind.png">${windSpeed} ${displayUnits[1]}</h4>
+    <h4><img src="imgs/h2o.png">${weatherData.humidity}</h4>
+    <h4><img src="imgs/uv.png">${weatherData.uv}</h4>
   </div>
   `;
 };

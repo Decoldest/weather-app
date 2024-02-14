@@ -49,11 +49,10 @@ async function getWeatherData(city) {
     } else {
       const weatherData = await response.json();
       errorMessage.textContent = "";
-      //console.log(weatherData);
+      // console.log(weatherData);
       processWeatherData(weatherData);
     }
   } catch (error) {
-    console.log(error);
     errorMessage.textContent = "Location not found";
   }
 }
@@ -69,11 +68,10 @@ async function getForecastData(city) {
     } else {
       const forecastData = await response.json();
       errorMessage.textContent = "";
-      //console.log(forecastData);
+      // console.log(forecastData);
       processForecastData(forecastData);
     }
   } catch (error) {
-    console.log(error);
     errorMessage.textContent = "Location not found";
   }
 }

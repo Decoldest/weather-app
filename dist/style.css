@@ -1,8 +1,14 @@
+:root {
+  --slider-celcius: #e65d5d;
+  --slider-farenheit: #71d3fd;
+}
+
 * {
   box-sizing: border-box;
 }
 
 #weather-display {
+  padding-top: 5%;
   width: 100%;
   min-height: 60svh;
   display: flex;
@@ -13,4 +19,89 @@
   width: 100%;
   display: flex;
   justify-content: space-around;
+}
+
+#units-container {
+  display: flex;
+  align-items: center;
+  gap: 1%;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--slider-celcius);
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: var(--slider-farenheit);
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px var(--slider-farenheit);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+input[type="checkbox"]:checked + .slider {
+  animation: flip 0.4s linear forwards; /* Added forwards to keep final state */
+}
+
+input[type="checkbox"]:not(:checked) + .slider {
+  animation: flip-back 0.4s linear forwards; /* Added forwards to keep final state */
+}
+
+@keyframes flip {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(180deg);
+  }
+}
+
+@keyframes flip-back {
+  0% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }

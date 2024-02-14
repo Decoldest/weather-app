@@ -7,12 +7,22 @@
   box-sizing: border-box;
 }
 
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hidden {
+  opacity: 0;
+}
+
 #weather-display {
   padding-top: 5%;
   width: 100%;
-  min-height: 60svh;
+  min-height: 50svh;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 
 #forecast-display {
@@ -81,11 +91,11 @@ input:focus + .slider {
 }
 
 input[type="checkbox"]:checked + .slider {
-  animation: flip 0.4s linear forwards; /* Added forwards to keep final state */
+  animation: flip 0.2s linear forwards; /* Added forwards to keep final state */
 }
 
 input[type="checkbox"]:not(:checked) + .slider {
-  animation: flip-back 0.4s linear forwards; /* Added forwards to keep final state */
+  animation: flip-back 0.2s linear forwards; /* Added forwards to keep final state */
 }
 
 @keyframes flip {

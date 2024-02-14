@@ -5,8 +5,8 @@ const errorMessage = document.getElementById("error-message");
 
 const processWeatherData = (weatherData) => {
   const {
-    temp_c: celcius,
-    feelslike_c: feelsCelcius,
+    temp_c: celsius,
+    feelslike_c: feelsCelsius,
     temp_f: farenheit,
     feelslike_f: feelsFarenheit,
     wind_kph: windK,
@@ -21,8 +21,8 @@ const processWeatherData = (weatherData) => {
   displayWeather({
     name,
     country,
-    celcius,
-    feelsCelcius,
+    celsius,
+    feelsCelsius,
     farenheit,
     feelsFarenheit,
     windK,

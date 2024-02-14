@@ -6,12 +6,12 @@ const units = {
   imperial: ["°F", "mph"],
 };
 
-const currentUnit = "metric";
+let currentUnit = "metric";
 
 const displayWeather = ({ ...weatherData }) => {
   const displayUnits = units[currentUnit];
   const temperature =
-    currentUnit === "metric" ? weatherData.celcius : weatherData.fahrenheit;
+    currentUnit === "metric" ? weatherData.celsius : weatherData.fahrenheit;
   const windSpeed =
     currentUnit === "metric" ? weatherData.windK : weatherData.windM;
 
@@ -43,18 +43,34 @@ const displayForecast = (foreCastData) => {
       currentDay.day.daily_chance_of_rain,
       currentDay.day.daily_chance_of_snow,
     );
-
+    console.log(currentDay);
     const newDayElement = document.createElement("div");
     newDayElement.innerHTML = `
     <h4>High ${currentDay.day.maxtemp_c} ${displayUnits[0]}</h4>
     <h4>Low ${currentDay.day.mintemp_c} ${displayUnits[0]}</h4>
     <h4>${precipitation}%</h4>
     <h4>${currentDay.day.condition.text}</h4>
+    <img src=https:${currentDay.day.condition.icon}>
+
     `;
     forecastDisplay.appendChild(newDayElement);
   }
 
   foreCastData.forEach(createDayForecast);
 };
+
+const temperatureInput = document.getElementById("temperature-input");
+const celciusText = document.getElementById("celcius");
+const farenheitText = document.getElementById("farenheit");
+
+temperatureInput.addEventListener("change", function () {
+  if (this.checked) {
+    currentUnit = "fahrenheit";
+  } else {
+    currentUnit = "celcius";
+  }
+  celciusText.classList.toggle("hidden");
+  farenheitText.classList.toggle("hidden");
+});
 
 export { displayWeather, displayForecast };

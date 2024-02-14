@@ -2,7 +2,14 @@
   box-sizing: border-box;
 }
 
-#display {
+#weather-display {
+  width: 100%;
+  min-height: 60svh;
+  display: flex;
+  justify-content: space-around;
+}
+
+#forecast-display {
   width: 100%;
   display: flex;
   justify-content: space-around;

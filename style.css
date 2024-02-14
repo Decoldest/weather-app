@@ -1,0 +1,9 @@
+* {
+  box-sizing: border-box;
+}
+
+#display {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}

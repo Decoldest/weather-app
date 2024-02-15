@@ -1,7 +1,9 @@
 import _ from "lodash";
-import { displayWeather, displayForecast } from "./UIDisplay";
+import { displayWeather, displayForecast, changeUnits } from "./UIDisplay";
 
 const errorMessage = document.getElementById("error-message");
+let currentWeatherData;
+let currentForecastData;
 
 const processWeatherData = (weatherData) => {
   const {
@@ -18,7 +20,7 @@ const processWeatherData = (weatherData) => {
 
   const { name, country } = weatherData.location;
 
-  displayWeather({
+  currentWeatherData = {
     name,
     country,
     celsius,
@@ -30,12 +32,14 @@ const processWeatherData = (weatherData) => {
     humidity,
     uv,
     condition,
-  });
+  };
+
+  displayWeather(currentWeatherData);
 };
 
 const processForecastData = (forecastData) => {
-  const days = forecastData.forecast.forecastday;
-  displayForecast(days);
+  currentForecastData = forecastData.forecast.forecastday;
+  displayForecast(currentForecastData);
 };
 
 async function getWeatherData(city) {
@@ -77,15 +81,34 @@ async function getForecastData(city) {
 }
 
 const searchLocationInput = document.getElementById("location");
-const searchLocationButton = document.querySelector("button#search");
+const searchForm = document.getElementById("search-form");
 
-searchLocationButton.addEventListener("click", () => {
+const searchLocation = () => {
   const newCity = searchLocationInput.value;
   if (newCity) {
     getWeatherData(newCity);
     getForecastData(newCity);
     searchLocationInput.value = "";
   }
+};
+
+searchForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  searchLocation();
+});
+
+const temperatureInput = document.getElementById("temperature-input");
+const celciusText = document.getElementById("celcius");
+const farenheitText = document.getElementById("farenheit");
+
+temperatureInput.addEventListener("change", () => {
+  changeUnits();
+
+  celciusText.classList.toggle("hidden");
+  farenheitText.classList.toggle("hidden");
+
+  displayWeather(currentWeatherData);
+  displayForecast(currentForecastData);
 });
 
 getWeatherData("toronto");

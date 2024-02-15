@@ -11,16 +11,16 @@ let currentUnit = "metric";
 const displayWeather = ({ ...weatherData }) => {
   const displayUnits = units[currentUnit];
   const temperature =
-    currentUnit === "metric" ? weatherData.celsius : weatherData.fahrenheit;
+    currentUnit === "metric" ? weatherData.celsius : weatherData.farenheit;
   const windSpeed =
     currentUnit === "metric" ? weatherData.windK : weatherData.windM;
 
   weatherDisplay.innerHTML = `
   <div>
-    <h1>${weatherData.name}</h1>
+    <h1 id="country">${weatherData.name}</h1>
     <h3>${weatherData.country}</h3>
     <h2>${weatherData.condition.text}</h2>
-    <h2>${temperature} ${displayUnits[0]}</h2>
+    <h1 id="temp">${temperature} ${displayUnits[0]}</h1>
   </div>
   <div>
     <h4>Feels like ${weatherData.feelsCelsius} ${displayUnits[0]}</h4>
@@ -38,18 +38,18 @@ function precipitationPercent(rain, snow) {
 const displayForecast = (foreCastData) => {
   const displayUnits = units[currentUnit];
 
+  forecastDisplay.innerHTML = "";
+
   function createDayForecast(currentDay) {
     const precipitation = precipitationPercent(
       currentDay.day.daily_chance_of_rain,
       currentDay.day.daily_chance_of_snow,
     );
-    console.log(currentDay);
     const newDayElement = document.createElement("div");
     newDayElement.innerHTML = `
-    <h4>High ${currentDay.day.maxtemp_c} ${displayUnits[0]}</h4>
-    <h4>Low ${currentDay.day.mintemp_c} ${displayUnits[0]}</h4>
-    <h4>${precipitation}%</h4>
-    <h4>${currentDay.day.condition.text}</h4>
+    <h5>${currentDay.day.maxtemp_c} ${displayUnits[0]}</h5>
+    <h6>${currentDay.day.mintemp_c} ${displayUnits[0]}</h6>
+    <h5><img id="rain" src="imgs/rain.png">${precipitation}%</h4>
     <img src=https:${currentDay.day.condition.icon}>
 
     `;
@@ -59,18 +59,8 @@ const displayForecast = (foreCastData) => {
   foreCastData.forEach(createDayForecast);
 };
 
-const temperatureInput = document.getElementById("temperature-input");
-const celciusText = document.getElementById("celcius");
-const farenheitText = document.getElementById("farenheit");
+const changeUnits = () => {
+  currentUnit = currentUnit === "metric" ? "imperial" : "metric";
+};
 
-temperatureInput.addEventListener("change", function () {
-  if (this.checked) {
-    currentUnit = "fahrenheit";
-  } else {
-    currentUnit = "celcius";
-  }
-  celciusText.classList.toggle("hidden");
-  farenheitText.classList.toggle("hidden");
-});
-
-export { displayWeather, displayForecast };
+export { displayWeather, displayForecast, changeUnits };
